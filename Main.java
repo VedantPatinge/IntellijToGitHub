@@ -4,25 +4,34 @@ import java.util.Map;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
-        String str = "Hello world hello world";
+        String str = "hello world";
 
-        // Split the string into words
-        String[] words = str.split("\\s+");
+        // Convert the string to lowercase to handle case-insensitive comparison
+        str = str.toLowerCase();
 
-        // Create a HashMap to store word count
-        Map<String, Integer> wordCountMap = new HashMap<>();
+        // Create a HashMap to store characters and their counts
+        Map<Character, Integer> charCountMap = new HashMap<>();
 
-        // Iterate through the words array
-        for (String word : words) {
-            // If the word is already in the map, increment its count
-            if (wordCountMap.containsKey(word)) {
-                wordCountMap.put(word, wordCountMap.get(word) + 1);
+        // Iterate through the characters of the string
+        for (char ch : str.toCharArray()) {
+            // Increment count if character is already present in the map
+            if (charCountMap.containsKey(ch)) {
+                charCountMap.put(ch, charCountMap.get(ch) + 1);
             } else {
-                // If the word is not in the map, add it with count 1
-                wordCountMap.put(word, 1);
+                // Add character to map with count 1 if it's not already present
+                charCountMap.put(ch, 1);
             }
         }
 
+        // Print duplicate characters
+        System.out.println("Duplicate characters:");
+        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+        }
     }
 }
+
